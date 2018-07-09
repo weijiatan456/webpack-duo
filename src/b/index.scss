@@ -1,0 +1,13 @@
+@import url("../assets/public.scss");
+$font-color:#333;
+.page_b{
+    width:200px;
+    height:200px;
+    margin:0 auto;
+    background: url("./b.jpg") no-repeat center center;
+    .txt{
+        text-align:center;
+        font-size: 16px;
+        color:$font-color
+    }
+}

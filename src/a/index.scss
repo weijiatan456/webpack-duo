@@ -1,6 +1,8 @@
 @import url("../assets/public.scss");
 $font-color:#333;
 .page_a{
+	display: flex;
+	transition:all 0.5s;
     width:200px;
     height:200px;
     margin:0 auto;

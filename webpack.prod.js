@@ -134,7 +134,9 @@ let config = {
                     plugins: ["transform-runtime", "syntax-dynamic-import"]
                 }
             },
-            exclude: /node_modules/
+            // exclude: /node_modules/
+            // 只编译src目录下的文件
+            include:path.resolve(__dirname, 'src')
         }, {
             test: /\.(png|svg|jpg|gif)$/,
             use: [
@@ -149,7 +151,7 @@ let config = {
             test: /(\.scss|\.css)$/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: ['css-loader', 'sass-loader']
+                use: ['css-loader','postcss-loader','sass-loader']
             })
         }]
     },

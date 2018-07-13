@@ -21,7 +21,7 @@ const
             .optimize
             .CommonsChunkPlugin({
                 name: 'vendors',
-                filename: "js/[name].js"
+                filename: "js/[name]-[chunkhash].js"
             }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "manifest",
@@ -120,10 +120,20 @@ let config = {
                 }
             ]
         }, {
-            test: /(\.scss|\.css)$/,
+            test: /(\.css)$/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: ['css-loader', 'sass-loader']
+                use: [{ loader: 'css-loader', options: { importLoaders: 1 } },
+                    'postcss-loader'
+                ]
+            })
+        }, {
+            test: /(\.scss)$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{ loader: 'css-loader', options: { importLoaders: 1 } },
+                    'postcss-loader','sass-loader'
+                ]
             })
         }]
     },

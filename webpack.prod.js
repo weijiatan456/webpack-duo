@@ -16,7 +16,7 @@ const plugins = [
         .optimize
         .CommonsChunkPlugin({
             name: 'vendors',
-            filename: "js/[name].js"
+            filename: "js/[name]-[chunkhash].js"
         }),
     new webpack.optimize.CommonsChunkPlugin({
         name: "manifest",
@@ -67,17 +67,19 @@ const plugins = [
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
     new OptimizeCssAssetsPlugin({
+        // cssProcessor: require('cssnano'),
         cssProcessorOptions: {
-            discardComments: {
-                removeAll: true
-            }
+            discardComments: { removeAll: true },
+            safe: true,
+            //所以这里选择关闭，使用postcss的autoprefixer功能，否则压缩前缀会被去除
+            autoprefixer: false
         },
-        canPrint: false
+        canPrint: true
     }),
-    new webpack.BannerPlugin('©'),
-    new BundleAnalyzerPlugin({
-        analyzerMode: 'static'
-    })
+    new webpack.BannerPlugin('©')
+    // new BundleAnalyzerPlugin({
+    //     analyzerMode: 'static'
+    // })
 ];
 
 function getEntry(globPath, pathDir) {
@@ -148,10 +150,20 @@ let config = {
                 }
             ]
         }, {
-            test: /(\.scss|\.css)$/,
+            test: /(\.css)$/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: ['css-loader','postcss-loader','sass-loader']
+                use: [{ loader: 'css-loader', options: { importLoaders: 1 } },  // importLoaders：通过import引入的css文件也自动添加前缀
+                    'postcss-loader'
+                ]
+            })
+        }, {
+            test: /(\.scss)$/,
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{ loader: 'css-loader', options: { importLoaders: 1 } },
+                    'postcss-loader','sass-loader'
+                ]
             })
         }]
     },

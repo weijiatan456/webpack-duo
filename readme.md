@@ -21,3 +21,24 @@
 ### 问题归纳
 
 在使用时，遇到网络问题，无法编译，比如scss无法编译，可尝试npm rebuild node-sass
+
+
+### jquery使用
+传统js使用webpack打包，参考目录factory。（不用jquery，package.json中expose-loader和jquery可去除）
+webpack.prod.js 引入如下loader，参见地址：https://webpack.docschina.org/loaders/expose-loader/
+``` python
+module: {
+	rules: [{
+	    test: require.resolve('jquery'),
+	    use: [{
+	        loader: 'expose-loader',
+	        options: 'jQuery'
+	    },{
+	        loader: 'expose-loader',
+	        options: '$'
+	    }]
+	}}
+}
+```
+
+附：Markdown在线编辑地址：https://maxiang.io/

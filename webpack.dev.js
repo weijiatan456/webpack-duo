@@ -98,6 +98,15 @@ let config = {
     },
     module: {
         rules: [{
+            test: require.resolve('jquery'),
+            use: [{
+                loader: 'expose-loader',
+                options: 'jQuery'
+            },{
+                loader: 'expose-loader',
+                options: '$'
+            }]
+        }, {
             test: /(\.jsx|\.js)$/,
             use: {
                 loader: "babel-loader",

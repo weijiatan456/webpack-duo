@@ -156,6 +156,15 @@ let config = {
                     options: {
                         outputPath: "img/",
                     }
+                },
+                {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        mozjpeg: {
+                            progressive: true,
+                            quality: 90
+                        }
+                    }
                 }
             ]
         }, {

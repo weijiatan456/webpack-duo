@@ -31,7 +31,7 @@ const
             Promise: "exports-loader?global.Promise!es6-promise",
             fetch: "exports-loader?self.fetch!whatwg-fetch"
         }),
-        new CleanWebpackPlugin(["js", "css", "img"], {
+        new CleanWebpackPlugin(["js", "css", "img","font"], {
             root: __dirname + "/dist/",
             verbose: true,
             dry: false
@@ -119,7 +119,7 @@ let config = {
             },
             exclude: /node_modules/
         }, {
-            test: /\.(png|svg|jpg|gif)$/,
+            test: /\.(png|jpg|gif)$/,
             use: [
                 {
                     loader: 'file-loader',
@@ -128,6 +128,15 @@ let config = {
                     }
                 }
             ]
+        }, {
+            test: /\.(svg|eot|ttf)$/,
+            use:{
+                loader: 'file-loader',
+                options: {
+                    outputPath: "font/",
+                }
+            },
+            exclude: /node_modules/
         }, {
             test: /(\.css)$/,
             use: ExtractTextPlugin.extract({

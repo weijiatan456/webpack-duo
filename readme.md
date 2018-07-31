@@ -22,7 +22,8 @@
 
 ### 问题归纳
 
-在使用时，遇到网络问题，无法编译，比如scss无法编译，可尝试npm rebuild node-sass
+1. 在使用时，遇到网络问题，无法编译，比如scss无法编译，可尝试npm rebuild node-sass
+2. 我本地的node关键是8.11.3，但是在安装时提示image-webpack-loader需要小于<7的版本，即使这样，打包还是能正常压缩。
 
 
 ### jquery使用

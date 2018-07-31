@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 let CleanWebpackPlugin = require("clean-webpack-plugin");
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const entry = {};
 
@@ -47,8 +46,7 @@ const
                 return getPath('css/[name].[contenthash].css').replace('\\js', '').replace('\\', '');
             },
             allChunks: true
-        }),
-        new DashboardPlugin()
+        })
     ];
 
 function getEntry(globPath, pathDir) {

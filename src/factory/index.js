@@ -1,4 +1,4 @@
-require("../utils/factory");
+require("./factory");
 
 $('.aaa').green();
 

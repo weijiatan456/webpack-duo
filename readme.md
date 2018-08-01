@@ -8,6 +8,7 @@
 
 `/factory`是UMD模式webpack的打包
 
+`/layer`引入了jquery和layer的两个依赖的写法
 
 ### 使用方法
 

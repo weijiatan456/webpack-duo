@@ -16,12 +16,19 @@ const devServer = {
 
 const
     plugins = [
-        new webpack
-            .optimize
-            .CommonsChunkPlugin({
-                name: 'vendors',
-                filename: "js/[name]-[chunkhash].js"
-            }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks (module) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js$/.test(module.resource) &&
+                    module.resource.indexOf(
+                        path.join(__dirname, './node_modules')
+                    ) === 0
+                )
+            }
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "manifest",
             minChunks: Infinity
@@ -71,7 +78,7 @@ pages.forEach(function (pathname) {
         filename: fileName + '.html',
         template: 'src' + pathname + '.html',
         inject: 'body',
-        chunks: ['vendors', 'manifest', fileName]
+        chunks: ['vendor', 'manifest', fileName]
     };
     plugins.push(new HtmlWebpackPlugin(conf));
     entry[fileName] = `./src/${pathname}.js`;

@@ -22,10 +22,6 @@ const plugins = [
         name: "manifest",
         minChunks: Infinity
     }),
-    new webpack.ProvidePlugin({
-        Promise: "exports-loader?global.Promise!es6-promise",
-        fetch: "exports-loader?self.fetch!whatwg-fetch"
-    }),
     new CleanWebpackPlugin(["js", "css", "img","font"], {
         root: __dirname + "/dist/",
         verbose: true,

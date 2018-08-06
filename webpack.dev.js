@@ -26,10 +26,6 @@ const
             name: "manifest",
             minChunks: Infinity
         }),
-        new webpack.ProvidePlugin({
-            Promise: "exports-loader?global.Promise!es6-promise",
-            fetch: "exports-loader?self.fetch!whatwg-fetch"
-        }),
         new CleanWebpackPlugin(["js", "css", "img","font"], {
             root: __dirname + "/dist/",
             verbose: true,
@@ -43,7 +39,7 @@ const
         new ExtractTextPlugin({
             filename: (getPath) => {
                 // return getPath('css/[name].min.css').replace('\\js', '').replace('\\', '');
-                return getPath('css/[name].[contenthash].css').replace('\\js', '').replace('\\', '');
+                return getPath('css/[name].css').replace('\\js', '').replace('\\', '');
             },
             allChunks: true
         })

@@ -117,7 +117,7 @@ let config = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "js/[name]-[chunkhash].bundle.js",  //注意hash和chunkhash的区别
-        chunkFilename: "js/[name]-[chunkhash].chunk.js",
+        chunkFilename: "js/[name]-[chunkhash].chunk.js", //异步加载require.ensure
         publicPath: "/dist/"
     },
     module: {

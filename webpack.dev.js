@@ -16,6 +16,9 @@ const devServer = {
 
 const
     plugins = [
+        new webpack.ProvidePlugin({
+            Promise: 'es6-promise-promise'
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks (module) {

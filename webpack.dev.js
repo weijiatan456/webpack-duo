@@ -16,9 +16,6 @@ const devServer = {
 
 const
     plugins = [
-        new webpack.ProvidePlugin({
-            Promise: 'es6-promise-promise'
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks (module) {
@@ -84,7 +81,7 @@ pages.forEach(function (pathname) {
         chunks: ['vendor', 'manifest', fileName]
     };
     plugins.push(new HtmlWebpackPlugin(conf));
-    entry[fileName] = `./src/${pathname}.js`;
+    entry[fileName] = ['babel-polyfill',`./src/${pathname}.js`];
     devServer.historyApiFallback.rewrites.push(
         {from: `${fileName}`, to: `/dist/${fileName}.html`}
     )

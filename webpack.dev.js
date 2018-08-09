@@ -5,7 +5,7 @@ let CleanWebpackPlugin = require("clean-webpack-plugin");
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const entry = {};
+const entry = {},chunksVal = [];
 
 const devServer = {
     contentBase: './dist',
@@ -31,7 +31,8 @@ const
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "manifest",
-            minChunks: Infinity
+            chunks: chunksVal,
+            minChunks:3
         }),
         new CleanWebpackPlugin(["js", "css", "img","font"], {
             root: __dirname + "/dist/",
@@ -74,6 +75,7 @@ let pages = Object.keys(getEntry('./src/*/*.html', 'src'));
 pages.forEach(function (pathname) {
     // MacOS系统下pathname.split('/')[1];
     const fileName = pathname.split('\\')[1];
+    chunksVal.push(fileName);
     const conf = {
         filename: fileName + '.html',
         template: 'src' + pathname + '.html',

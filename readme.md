@@ -46,3 +46,42 @@ module: {
 ```
 
 附：Markdown在线编辑地址：https://maxiang.io/
+
+
+### CommonsChunkPlugin的注意事项
+
+``` python
+new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks (module) {
+        // any required modules inside node_modules are extracted to vendor
+        return (
+            module.resource &&
+            /\.js$/.test(module.resource) &&
+            module.resource.indexOf(
+                path.join(__dirname, './node_modules')
+            ) === 0
+        )
+    }
+}),
+new webpack.optimize.CommonsChunkPlugin({
+    name: "manifest",
+    chunks: chunksVal,
+    minChunks:3
+}),
+```
+或者
+
+``` python
+new webpack.optimize.CommonsChunkPlugin({
+    name: "manifest",
+    minChunks:3
+}),
+```
+以上两者的区别是，有没有提取node_modules的组件，他们都能正常提取公用部分
+
+minChunks一定要写明，否则部分的页面没有引用`public.scss`也是无法生成公用css的（重点）。
+
+css的引用需要使用`require("./index.scss");` 这种方式，否则css也是无法生成公用的（重点）。
+
+如果页面不提公用，使用`import '../utils/theme/default/layer.css';`这种方式也是可以的。

@@ -1,6 +1,7 @@
+import '../utils/theme/default/layer.css';
+
 require("./layerFun");
 import {getHome} from '../utils/getData'
-import '../utils/theme/default/layer.css';
 
 $('.aaa').green();
 

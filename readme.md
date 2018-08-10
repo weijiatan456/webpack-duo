@@ -82,6 +82,18 @@ new webpack.optimize.CommonsChunkPlugin({
 
 minChunks一定要写明，否则部分的页面没有引用`public.scss`也是无法生成公用css的（重点）。
 
-css的引用需要使用`require("./index.scss");` 这种方式，否则css也是无法生成公用的（重点）。
 
-如果页面不提公用，使用`import '../utils/theme/default/layer.css';`这种方式也是可以的。
+### css的引用方式
+
+js文件下：
+
+``` python
+require("./index.scss");
+import '../utils/theme/default/layer.css';
+```
+
+css文件下：
+
+``` python
+@import url("../assets/public.scss");
+```

@@ -8,9 +8,9 @@
 		module.exports = factory(require('jquery'),require('../utils/layer'));
 	} else {
 		// Browser globals
-		factory(jQuery,layer);
+		factory(jQuery);
 	}
-}(function ($,layer) {
+}(function ($) {
 
 	$.sum = function(a, b){
 		return a+b;

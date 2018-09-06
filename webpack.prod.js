@@ -147,7 +147,7 @@ let config = {
             // 只编译src目录下的文件
             include:path.resolve(__dirname, 'src')
         }, {
-            test: /\.(png|jpg|gif)$/,
+            test: /\.(woff2?|png|jpg|gif)$/,
             use: [
                 {
                     loader: 'file-loader',

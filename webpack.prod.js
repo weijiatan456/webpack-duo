@@ -200,7 +200,11 @@ let config = {
         ],
         modules: ["node_modules"]
     },
-    devtool: "null"
+    devtool: "null",
+    stats:{
+        modules: false,
+        children: false
+    }
 };
 
 module.exports = config;

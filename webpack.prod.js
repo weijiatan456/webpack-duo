@@ -11,7 +11,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const entry = {},chunksVal = [];
 
-const plugins = [
+let plugins = [
     new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         minChunks (module) {

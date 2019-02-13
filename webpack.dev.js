@@ -14,8 +14,7 @@ const devServer = {
     }
 };
 
-const
-    plugins = [
+let plugins = [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks (module) {
@@ -33,11 +32,6 @@ const
             name: "manifest",
             chunks: chunksVal,
             minChunks:3
-        }),
-        new CleanWebpackPlugin(["js", "css", "img","font"], {
-            root: __dirname + "/dist/",
-            verbose: true,
-            dry: false
         }),
         new webpack.DefinePlugin({
             "process.env": {
@@ -167,7 +161,15 @@ let config = {
         modules: ["node_modules"]
     },
     devtool: 'inline-source-map',
-    devServer: devServer
+    devServer: devServer,
+    stats:{
+        children: false
+    },
+    watch: true,
+    watchOptions:{
+        poll:1000,
+        ignored:/node_modules/
+    }
 };
 
 module.exports = config;

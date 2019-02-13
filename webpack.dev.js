@@ -1,6 +1,6 @@
 let webpack = require("webpack");
 let path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin-for-multihtml");
 let CleanWebpackPlugin = require("clean-webpack-plugin");
 const glob = require('glob');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -74,7 +74,8 @@ pages.forEach(function (pathname) {
         filename: fileName + '.html',
         template: 'src' + pathname + '.html',
         inject: 'body',
-        chunks: ['vendor', 'manifest', fileName]
+        chunks: ['vendor', 'manifest', fileName],
+        multihtmlCache:true
     };
     plugins.push(new HtmlWebpackPlugin(conf));
     entry[fileName] = ['babel-polyfill',`./src/${pathname}.js`];
